@@ -1,7 +1,7 @@
 ﻿
 using ListMeeting.Models.Models;
 using ListMeetings.Core.Data;
-using ListMeetings.Core.Services.DataMapper;
+using ListMeetings.Core.DataMapper;
 
 namespace ListMeeting.Core.Repository
 {
@@ -70,12 +70,13 @@ namespace ListMeeting.Core.Repository
                     result.Add(_dataMapper.CreateDomainModel(meeting));
                 }
 
-                return result;
+                return result.OrderBy(x => x.DateTimeStartEvent).ToList();
             }
-
             foreach (MeetingDTO meeting in _dataBase)
                 result.Add(_dataMapper.CreateDomainModel(meeting));
-            return result;
+
+
+            return result.OrderBy(x=>x.DateTimeStartEvent).ToList();
         }
 
 

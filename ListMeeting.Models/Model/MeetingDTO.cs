@@ -20,20 +20,19 @@ namespace ListMeeting.Models.Models
         [Required]
         public string NameMeeting { get; set; } = String.Empty;
 
-        [DisplayName( "Начало")]
+        [DisplayName( "Начало встречи")]
         [Required]
         public DateTime DateTimeStartEvent { get; set; }
 
-        [DisplayName("Окончание")]
+        [DisplayName("Окончание встречи")]
         [Required]
         public DateTime DateTimeEndEvent {get; set;}
 
         [Range(1, 1440)]
-        //[DisplayName("Напомнить за")]
         [Required]
         public int TimeReminder {get; set;}
 
-       // public bool NeedToRemind { get; set; }
+    
 
        
     }

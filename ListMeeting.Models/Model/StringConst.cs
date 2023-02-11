@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ListMeeting.Models.Models
+﻿namespace ListMeeting.Models.Models
 {
     public static class StringConst
     {
@@ -24,7 +18,7 @@ namespace ListMeeting.Models.Models
                 $"  Команда [4] - Просмотр всех записей \n" +
                 $"  Команда [5] - Просмотр записей за выбранную дату\n" +
                 $"  Команда [6] - Заверщить программу";
-
+        public const string AddTestMeetings = $"  Команда [7] - Добавить тестовые записи";
         public const string EnterComand = "\nВведите команду([?] - список команд):";
         public const string EnterDate = "\nВыберите дату начала  с помощью стрелок клавиатуры:";
         public const string EnterTime = "\n\nВыберите время начала  с помощью стрелок клавиатуры";
@@ -43,5 +37,7 @@ namespace ListMeeting.Models.Models
         public const string ErrorMeetingInPast = " Вcтреча должна быть запланирована на будущее!";
         public const string ErrorUpdate = " \n Запись не обновлена";
         public const string ErrorAdd = " \n Запись не добавлена";
+        public const string ExportInFile = " \n Экспортировать данные в файл ?(Y/N):";
+        public const string NameExportFile = " \n Ввtдите имя файла:";
     }
 }

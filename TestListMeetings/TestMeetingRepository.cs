@@ -15,11 +15,7 @@ namespace TestListMeetings
         public void Setup()
         {
             dataMapper = new DataMapper();
-
             DataBase = new ConcurrentMeetingsList();
-
-            
-
             _meetingsRepo = new MeetingRepository(DataBase, dataMapper);
 
             DataBase.Add(new MeetingDTO { Id  = 1, 
@@ -41,9 +37,6 @@ namespace TestListMeetings
         public void TestGetFirstOfDefault()
         {
           
-           
-
-
             Assert.IsNull(_meetingsRepo.FirstOfDefault(x => x.Id == 2).Item1);
             Assert.NotNull(_meetingsRepo.FirstOfDefault(x => x.Id == 1).Item1);
             Assert.That(_meetingsRepo.FirstOfDefault(x => x.Id == 1).Item2.Success, Is.EqualTo(200));

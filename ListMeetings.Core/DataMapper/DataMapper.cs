@@ -1,6 +1,6 @@
 ﻿using ListMeeting.Models.Models;
 
-namespace ListMeetings.Core.Services.DataMapper
+namespace ListMeetings.Core.DataMapper
 {
     public class DataMapper : IDataMapper<Meeting, MeetingDTO>
     {

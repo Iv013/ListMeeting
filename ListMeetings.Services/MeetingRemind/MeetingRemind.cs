@@ -1,25 +1,24 @@
-﻿using ListMeeting.Models.Models;
-using ListMeetings.Core.Data;
-using ListMeetings.Core.Services.DataMapper;
+﻿using ListMeeting.Core.Repository;
+using ListMeeting.Models.Models;
 
-namespace ListMeetings.Core.Services.MeetingRemind
+namespace ListMeetings.Services.MeetingRemind
 {
     public class MeetingRemind : IMeetingRemind
     {
-        private ConcurrentMeetingsList _dataBase;
-        private IDataMapper<Meeting, MeetingDTO> _dataMapper;
-        public MeetingRemind(ConcurrentMeetingsList dataBase,
-         IDataMapper<Meeting, MeetingDTO> dataMapper)
+  
+     IMeetingRepository<Meeting, MeetingDTO> _meetingsRepo;
+        public MeetingRemind(IMeetingRepository<Meeting, MeetingDTO> meetingsRepo)
         {
-            _dataBase = dataBase;
-            _dataMapper = dataMapper;
+            _meetingsRepo = meetingsRepo;
+
         }
 
         public IEnumerable<ServiceResponse> MakeRemind()
         {
-                foreach (var meetingDTO in _dataBase)
+          var  _dataBase = _meetingsRepo.GetAllMeetings();
+                foreach (var meeting in _dataBase)
                 {
-                    var meeting = _dataMapper.CreateDomainModel(meetingDTO);
+           
                     if (meeting.DateTimeStartEvent - TimeSpan.FromMinutes(meeting.TimeReminder) < DateTime.Now
                         && meeting.NeedToRemind)
 
@@ -31,7 +30,8 @@ namespace ListMeetings.Core.Services.MeetingRemind
                             Success = 100
                         };
                         meeting.TimeReminder = 0;
-                    meetingDTO.TimeReminder = 0;
+                    _meetingsRepo.UpdateMeeting(meeting);
+    
                     }
                 }
            

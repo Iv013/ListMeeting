@@ -1,8 +1,5 @@
 ﻿
 using ListMeeting.Models.Models;
-using ListMeetings.View;
-using System.ComponentModel;
-using System.Text;
 
 namespace ListMeetings.View
 {
@@ -37,7 +34,7 @@ namespace ListMeetings.View
             do
             {
                 Console.Write(StringConst.EnterTimeDuration);
-            } while (!int.TryParse(Console.ReadLine(), out duration)|| duration<0);
+            } while (!int.TryParse(Console.ReadLine(), out duration) || duration < 0);
 
             return duration;
         }
@@ -55,7 +52,14 @@ namespace ListMeetings.View
             return consoleDatePickerMini.GetDate();
         }
 
-        public void Initializind()=> Console.WriteLine(StringConst.ListComand);
+        public void Initializind()  
+            {
+            Console.WriteLine(StringConst.ListComand);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(StringConst.AddTestMeetings);
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+  
         public string ReadLine() => Console.ReadLine();
         public void WriteEnterCommand() => Console.Write(StringConst.EnterComand);
 
@@ -100,15 +104,14 @@ namespace ListMeetings.View
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(StringConst.UpdateQuestions);
-            Console.ForegroundColor = ConsoleColor.Gray;
+            
             var obj = (Meeting)meeting.Clone();
 
             bool editmode = true;
             while (editmode)
             {
                 ShowMeetings(new List<Meeting> { obj });
-
-
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write(StringConst.EditModeEnterCommand);
                 switch (Console.ReadLine())
                 {
@@ -133,6 +136,7 @@ namespace ListMeetings.View
                             obj = null;
                         }
                         editmode = false;
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         break;
                 }
 
@@ -152,7 +156,7 @@ namespace ListMeetings.View
         }
 
 
-        //Отрисовака сообщений в звависимости от ответа  на команды CRUD
+        //Отрисовака сообщений в звависимости от ответа  на команды CRUD, и напоминаий о встрече
         public void WriteMessage(ServiceResponse serviceResponse)
         {
             Console.ForegroundColor = serviceResponse.Success == 200 ? ConsoleColor.Green
@@ -161,6 +165,25 @@ namespace ListMeetings.View
             Console.WriteLine();
             Console.WriteLine(serviceResponse.Message);
             Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+       public  string? AskQuestionExportInFile()
+        {
+            string result;
+            do
+            {
+                Console.Write(StringConst.ExportInFile);
+                result = Console.ReadLine();
+            } while (result.ToLower() != "n" && result.ToLower() != "y");
+            if (result.ToLower() == "n") return null ;
+
+
+            if   (result.ToLower() == "y")
+            {
+                Console.Write(StringConst.NameExportFile);
+                result = Console.ReadLine();
+            };
+            return result;
         }
 
     }

@@ -1,7 +1,7 @@
 ﻿using ListMeeting.Models.Models;
 
 
-namespace ListMeetings.Core.Services
+namespace ListMeetings.Services.MeetingRemind
 {
     public interface IMeetingRemind
     {

@@ -1,4 +1,4 @@
-﻿namespace ListMeetings.Core.Services.DataMapper
+﻿namespace ListMeetings.Core.DataMapper
 {
     public interface IDataMapper<T, T1>
     {
