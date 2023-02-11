@@ -1,7 +1,7 @@
 using ListMeeting.Core.Repository;
 using ListMeeting.Models.Models;
 using ListMeetings.Core.Data;
-using ListMeetings.Core.Services.DataMapper;
+using ListMeetings.Core.DataMapper;
 
 namespace TestListMeetings
 {

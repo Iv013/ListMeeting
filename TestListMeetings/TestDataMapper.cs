@@ -1,5 +1,5 @@
 ﻿using ListMeeting.Models.Models;
-using ListMeetings.Core.Services.DataMapper;
+using ListMeetings.Core.DataMapper;
 
 namespace TestListMeetings
 {

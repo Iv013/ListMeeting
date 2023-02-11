@@ -16,7 +16,8 @@ namespace ListMeeting.Models.Models
 
         [DisplayName( "Начало встречи")]
         [Required]
-        public DateTime DateTimeStartEvent
+        //добаляем логику, что при установке начального времени, устанавливаем и конечное время, в зависимости от длятельности встречи
+        public DateTime DateTimeStartEvent 
         { get  { return _dateTimeStartEvent;}
           set
           {
@@ -28,6 +29,7 @@ namespace ListMeeting.Models.Models
 
         [Required]
         [Range(1,1440)]
+        //при изменении продолжительности встречи меняем конечное время
         public int DurationEvent
         {
             get
@@ -44,7 +46,7 @@ namespace ListMeeting.Models.Models
         private DateTime _dateTimeEndEvent;
         private DateTime _dateTimeStartEvent;
         private int _durationEvent;
-        private bool needToRemind = true;
+        private bool needToRemind = true;  
         private int _timeReminder = 5;
 
         [DisplayName("Окончание встречи")]
@@ -67,15 +69,15 @@ namespace ListMeeting.Models.Models
             set
             { 
                 _timeReminder = value;
-                needToRemind = !(_timeReminder == 0); 
+                needToRemind = !(_timeReminder == 0); //Есил время напоимнания установлено в 0, сбрасываем флаг необходимости напоминания
             }
         } 
         public bool NeedToRemind { get { return needToRemind; }  }
 
 
-
-
-        public override string ToString()
+        
+        //переопределяем метод, чтобы при выводе в консоль данные корректно выводились
+        public override string ToString()  
         {
             StringBuilder stringBuilder =  new StringBuilder();
             stringBuilder.Append(getStringWithSpace(Id.ToString()));
@@ -96,6 +98,9 @@ namespace ListMeeting.Models.Models
             return ("|" + text.PadRight(maxlenght) + "|");
         }
 
+        //реализуем  интерфейс IClonable, так как мы не использууем настоящую базу данных, при получении данных из листа будем получать ссылку
+        //чтобы корректно отрабатывал алгоритм обновления, при обновлении данных будем вначале полуать запись, потом клонировать,
+        //затем изменять данный клонированного объекта и затем подменять старую запись на новую.
         public object Clone()
         {
             return MemberwiseClone();

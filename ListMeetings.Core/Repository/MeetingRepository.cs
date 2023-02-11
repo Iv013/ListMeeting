@@ -58,7 +58,7 @@ namespace ListMeeting.Core.Repository
                     new ServiceResponse());  
         }
 
-
+        //получение всех записей
         public List<Meeting> GetAllMeetings(Func<MeetingDTO, bool> dateFilter = null)
         {
             List < Meeting > result = new List<Meeting >();
@@ -70,13 +70,13 @@ namespace ListMeeting.Core.Repository
                     result.Add(_dataMapper.CreateDomainModel(meeting));
                 }
 
-                return result.OrderBy(x => x.DateTimeStartEvent).ToList();
+                return result.OrderBy(x => x.DateTimeStartEvent).ToList(); // результат из нескольких записей всегда сортируем по дате начала
             }
             foreach (MeetingDTO meeting in _dataBase)
                 result.Add(_dataMapper.CreateDomainModel(meeting));
 
 
-            return result.OrderBy(x=>x.DateTimeStartEvent).ToList();
+            return result.OrderBy(x=>x.DateTimeStartEvent).ToList();  // результат из нескольких записей всегда сортируем по дате начала
         }
 
 

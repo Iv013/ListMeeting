@@ -9,19 +9,22 @@ namespace ListMeeting
     internal class Mainlogic
     {
 
+        private readonly ActionsWithConsole _actionWithConsole;
+        private readonly IMeetingRepository<Meeting, MeetingDTO> _meetingsRepo;
+        private readonly IMeetingRemind _meetingRemind;
+        private readonly IExportEntity<Meeting> _exportEntity;
 
-        ActionsWithConsole _actionWithConsole;
-        IMeetingRepository<Meeting, MeetingDTO> _meetingsRepo;
-        IMeetingRemind _meetingRemind;
         public Mainlogic(ActionsWithConsole actionWithConsole,
             IMeetingRepository<Meeting, MeetingDTO> meetingsRepo,
-            IMeetingRemind meetingRemind)
+            IMeetingRemind meetingRemind,
+            IExportEntity<Meeting> exportEntity)
         {
             _actionWithConsole = actionWithConsole;
             _meetingsRepo = meetingsRepo;
             _meetingRemind = meetingRemind;
             //запускаем задачу на отправку напоминаний в рамках втроичного потока 
             Task snakeTask = SendRemind(_meetingRemind);
+            _exportEntity = exportEntity;
         }
 
         public async Task Runlogic()
@@ -102,11 +105,10 @@ namespace ListMeeting
                 var nameFile = _actionWithConsole.AskQuestionExportInFile();
                 if (nameFile != null)
                 {
-                    Export<Meeting> exportMeetings = new Export<Meeting>();
-                    var result = exportMeetings.StartExportToFile(meetings, nameFile);
+                 
+                    var result = _exportEntity.StartExportToFile(meetings, nameFile);
 
-                    var ActionC = new ActionsWithConsole();
-                    ActionC.WriteMessage(new ServiceResponse { Message = result.Item1, Success = result.Item2 ? 200 : 409 });
+                    _actionWithConsole.WriteMessage(new ServiceResponse { Message = result.Item1, Success = result.Item2 ? 200 : 409 });
                 }
             }
         }
@@ -129,7 +131,7 @@ namespace ListMeeting
 
 
             }
-
+            Console.WriteLine("данные добавлены");
 
         }
         //метод выдачи уведомлений о предстоящей встрече
@@ -145,6 +147,7 @@ namespace ListMeeting
                 {
                     viewInteface.WriteMessage(meeting);
                 }
+             
             }
         }
     }

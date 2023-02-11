@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ListMeetings.View
 {
-    class ConsoleDateTimePicker
+    class ConsoleDateTimePicker  //класс выбора даты или времени
     {
         public int Left { get; }
         public int Top { get; set; }
@@ -14,12 +14,7 @@ namespace ListMeetings.View
         public int TypePicker { get; set; }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="top"></param>
-        /// <param name="date"></param>
+    
         /// <param name="typePicker">0-data, 1 time</param>
         public ConsoleDateTimePicker(int left, int top, DateTime date, int typePicker=0)
         {

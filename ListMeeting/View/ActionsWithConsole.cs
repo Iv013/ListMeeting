@@ -44,6 +44,7 @@ namespace ListMeetings.View
         {
             Console.Write(type == 0 ? StringConst.EnterDate : StringConst.EnterTime);
 
+            //класс выбора даты или времени
             ConsoleDateTimePicker consoleDatePickerMini = new ConsoleDateTimePicker(
                 Console.GetCursorPosition().Left + 1,
                 Console.GetCursorPosition().Top - 1,
@@ -52,6 +53,7 @@ namespace ListMeetings.View
             return consoleDatePickerMini.GetDate();
         }
 
+        //Отрисовка стартовых сообщений и списка команд
         public void Initializind()  
             {
             Console.WriteLine(StringConst.ListComand);
@@ -63,9 +65,9 @@ namespace ListMeetings.View
         public string ReadLine() => Console.ReadLine();
         public void WriteEnterCommand() => Console.Write(StringConst.EnterComand);
 
-     
 
 
+        //Формирование в консоли таблицы с данными о встречах
         public void ShowMeetings(List<Meeting> meetings)
         {
             //Отрисовываем шапку таблицы
@@ -79,6 +81,7 @@ namespace ListMeetings.View
             Console.WriteLine();
         }
 
+        //Получения ID номера встречи которую нужно удалить или изменить
         public int GetIdForDeleteOrUpdate(int type = 0)
         {
             int Id;
@@ -89,6 +92,7 @@ namespace ListMeetings.View
             return Id;
         }
 
+        //Получения времени, за сколько минут нужно напомнить о встрече
         public int GetTimeReminder()
         {
             int timeReminder;
@@ -100,6 +104,7 @@ namespace ListMeetings.View
             return timeReminder;
         }
 
+        //Формирования объекта, который необходимо обновить
         internal Meeting GetMeetingForUpdate(in Meeting meeting)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -144,6 +149,8 @@ namespace ListMeetings.View
             return obj;
         }
 
+
+        //Запрос сохранять внесенные изменения или нет.
         private bool SaveOrNoСhanges()
         {
             string result;
@@ -167,7 +174,9 @@ namespace ListMeetings.View
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-       public  string? AskQuestionExportInFile()
+
+        //Запрос о необходимости экпорта данных в файл.
+        public string? AskQuestionExportInFile()
         {
             string result;
             do

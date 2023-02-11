@@ -2,14 +2,13 @@
 
 namespace ListMeetings.Services.ExportMeetings
 {
-    public class Export<T> : IExportEntity<T> where T : class
+    public class ExportEntity<T> : IExportEntity<T> where T : class
     {
         
 
         public(string, bool) StartExportToFile(List<T> model, string nameFile) 
         {
-       
-            try
+            try //в try Catch обернул так как может прийти неверное имя файла, чтобы не проверять регулярными выражениями
             {
                 var file = new FileInfo(nameFile.Trim() == "" ? "Новый файл.txt" : nameFile.Trim()+".txt");
                 using (var writer = new StreamWriter(file.FullName))
@@ -22,13 +21,11 @@ namespace ListMeetings.Services.ExportMeetings
                     writer.Close();
                 }
 
-                return ("Файл экспорта экпорта данных успешно создан. Файл находиться о адресу:\n" +
+                return ("Файл экспорта данных успешно создан. Файл находиться о адресу:\n" +
                     ""+ file.FullName,true);
-
             }
             catch ( Exception ex )
             {
-
                 return (ex.Message, false);
             }
         

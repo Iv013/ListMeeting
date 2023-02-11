@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ListMeeting.Models\ListMeeting.Models.csproj" />
     <ProjectReference Include="..\ListMeetings.Core\ListMeetings.Core.csproj" />
+    <ProjectReference Include="..\ListMeetings.Services\ListMeetings.Services.csproj" />
   </ItemGroup>
 
 </Project>
