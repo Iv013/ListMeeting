@@ -28,7 +28,7 @@ static class Program
         IMeetingRepository<Meeting, MeetingDTO> _meetingsRepo = new MeetingRepository(DataBase, dataMapper);
 
         //класс для формирования сообщений с напоминаниями о встрече
-        IMeetingRemind meetingRemind = new MeetingRemind(_meetingsRepo); 
+        IMeetingReminder meetingRemind = new MeetingReminder(_meetingsRepo); 
 
         //Класс, в котором с помощью рефлексии реализован экспорт параметров в файл.
         IExportEntity<Meeting> _exportEntity = new ExportEntity<Meeting>();

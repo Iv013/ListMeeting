@@ -11,12 +11,12 @@ namespace ListMeeting
 
         private readonly ActionsWithConsole _actionWithConsole;
         private readonly IMeetingRepository<Meeting, MeetingDTO> _meetingsRepo;
-        private readonly IMeetingRemind _meetingRemind;
+        private readonly IMeetingReminder _meetingRemind;
         private readonly IExportEntity<Meeting> _exportEntity;
 
         public Mainlogic(ActionsWithConsole actionWithConsole,
             IMeetingRepository<Meeting, MeetingDTO> meetingsRepo,
-            IMeetingRemind meetingRemind,
+            IMeetingReminder meetingRemind,
             IExportEntity<Meeting> exportEntity)
         {
             _actionWithConsole = actionWithConsole;
@@ -77,7 +77,7 @@ namespace ListMeeting
                         break;
                     case "5": //Показать  записи за определенную дату
                         var dateMeetings = _actionWithConsole.GetEnterDateOrTime().Date;
-                        meetings = _meetingsRepo.GetAllMeetings(x => x.DateTimeStartEvent.Date == dateMeetings);
+                        meetings = _meetingsRepo.GetAllMeetings(x => x.DateTimeStartMeeting.Date == dateMeetings);
                         _actionWithConsole.ShowMeetings(meetings);
                         Export(meetings);
                         break;
@@ -122,8 +122,8 @@ namespace ListMeeting
                 _meetingsRepo.AddMeeting(new Meeting
                 {
                     Id = i,
-                    DateTimeStartEvent = DateTime.Now + TimeSpan.FromDays(i) + TimeSpan.FromMinutes(4),
-                    DurationEvent = 120,
+                    DateTimeStartMeeting = DateTime.Now + TimeSpan.FromDays(i) + TimeSpan.FromMinutes(4),
+                    DurationMeeting = 120,
                     TimeReminder = 10,
                     NameMeeting = "Встреча №" + (i + 1).ToString(),
                 });
@@ -137,13 +137,13 @@ namespace ListMeeting
         //метод выдачи уведомлений о предстоящей встрече
         // проверка выполняется каждые 10 сек,
         // при наличии нового сообщения оно выводиться в консоль
-        static async Task SendRemind(IMeetingRemind eventRepository)
+        static async Task SendRemind(IMeetingReminder eventRepository)
         {
             ActionsWithConsole viewInteface = new ActionsWithConsole();
             while (true)
             {
                 await Task.Delay(10000);
-                foreach (var meeting in eventRepository.MakeRemind())
+                foreach (var meeting in eventRepository.MakeReminder())
                 {
                     viewInteface.WriteMessage(meeting);
                 }

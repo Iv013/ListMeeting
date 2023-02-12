@@ -19,16 +19,16 @@ namespace TestListMeetings
             _meetingsRepo = new MeetingRepository(DataBase, dataMapper);
 
             DataBase.Add(new MeetingDTO { Id  = 1, 
-                DateTimeEndEvent = DateTime.Now + TimeSpan.FromMinutes(50) , 
+                DateTimeEndMeeting = DateTime.Now + TimeSpan.FromMinutes(50) , 
                 NameMeeting = "Name", 
-                DateTimeStartEvent=DateTime.Now, 
+                DateTimeStartMeeting=DateTime.Now, 
                 TimeReminder = 10});
             DataBase.Add(new MeetingDTO
             {
                 Id = 11,
-                DateTimeEndEvent = DateTime.Now + TimeSpan.FromMinutes(30) + TimeSpan.FromDays(1),
+                DateTimeEndMeeting = DateTime.Now + TimeSpan.FromMinutes(30) + TimeSpan.FromDays(1),
                 NameMeeting = "Name",
-                DateTimeStartEvent = DateTime.Now + TimeSpan.FromDays(1),
+                DateTimeStartMeeting = DateTime.Now + TimeSpan.FromDays(1),
                 TimeReminder = 10
             });
         }
@@ -54,8 +54,8 @@ namespace TestListMeetings
 
 
             var newObj = new Meeting { NameMeeting = "Name 2",
-                DurationEvent = 60,
-                DateTimeStartEvent = DateTime.Now+TimeSpan.FromMinutes(2),
+                DurationMeeting = 60,
+                DateTimeStartMeeting = DateTime.Now+TimeSpan.FromMinutes(2),
                 TimeReminder = 10
             };
             //Добавляем запись с временем которое пересекается с имеющейся записью, ожиаем ошибку, и количество записей не измениться
@@ -66,8 +66,8 @@ namespace TestListMeetings
              newObj = new Meeting
             {
                 NameMeeting = "Name 2",
-                DurationEvent = 10,
-                DateTimeStartEvent = DateTime.Now - TimeSpan.FromMinutes(40),
+                DurationMeeting = 10,
+                DateTimeStartMeeting = DateTime.Now - TimeSpan.FromMinutes(40),
                 TimeReminder = 10
             };
             //Добавляем запись с временем из прошлого, ожиаем ошибку, и количество записей не измениться
@@ -85,8 +85,8 @@ namespace TestListMeetings
             var newObj = new Meeting
             {
                 NameMeeting = "Name 2",
-                DurationEvent = 60,
-                DateTimeStartEvent = DateTime.Now + TimeSpan.FromMinutes(120),
+                DurationMeeting = 60,
+                DateTimeStartMeeting = DateTime.Now + TimeSpan.FromMinutes(120),
                 TimeReminder = 10
             };
             //Добавляем запись ожидаем корректное жоавбение и количество записей будет 2
@@ -96,8 +96,8 @@ namespace TestListMeetings
              newObj = new Meeting
             {
                 NameMeeting = "Name 3",
-                DurationEvent = 30,
-                DateTimeStartEvent = DateTime.Now + TimeSpan.FromMinutes(180),
+                DurationMeeting = 30,
+                DateTimeStartMeeting = DateTime.Now + TimeSpan.FromMinutes(180),
                 TimeReminder = 10
             };
             //Добавляем запись ожидаем корректное жоавбение и количество записей будет 3
@@ -138,14 +138,14 @@ namespace TestListMeetings
         public void TestUpdateMeetingWithError()
         {
             var obj = _meetingsRepo.FirstOfDefault(x => x.Id == 1);
-            obj.Item1.DateTimeStartEvent = DateTime.Now - TimeSpan.FromMinutes(10);
+            obj.Item1.DateTimeStartMeeting = DateTime.Now - TimeSpan.FromMinutes(10);
 
            
             Assert.That(_meetingsRepo.UpdateMeeting(obj.Item1).Success, Is.EqualTo(409));
             // ожидаем что запись не обновиться так как дата начала в прошлом
           Assert.That(_meetingsRepo.UpdateMeeting(obj.Item1).Message, Is.EqualTo(StringConst.ErrorUpdate + StringConst.ErrorMeetingInPast));
 
-            obj.Item1.DateTimeStartEvent = DateTime.Now + TimeSpan.FromDays(1);
+            obj.Item1.DateTimeStartMeeting = DateTime.Now + TimeSpan.FromDays(1);
 
             // ожидаем что запись не обновиться так как даты пересекаются
             Assert.That(_meetingsRepo.UpdateMeeting(obj.Item1).Message, Is.EqualTo(StringConst.ErrorUpdate + StringConst.ErrorMeetingsIntersection));
@@ -155,7 +155,7 @@ namespace TestListMeetings
         public void TestUpdateMeetingWithSuccess()
         {
             var obj = _meetingsRepo.FirstOfDefault(x => x.Id == 1);
-            obj.Item1.DateTimeStartEvent = DateTime.Now + TimeSpan.FromMinutes(10);
+            obj.Item1.DateTimeStartMeeting = DateTime.Now + TimeSpan.FromMinutes(10);
 
 
             Assert.That(_meetingsRepo.UpdateMeeting(obj.Item1).Success, Is.EqualTo(200));
@@ -166,7 +166,7 @@ namespace TestListMeetings
 
 
 
-            obj.Item1.DateTimeStartEvent = DateTime.Now + TimeSpan.FromDays(3);
+            obj.Item1.DateTimeStartMeeting = DateTime.Now + TimeSpan.FromDays(3);
             _meetingsRepo.UpdateMeeting(obj.Item1);
 
             Assert.AreEqual("Изменено", _meetingsRepo.FirstOfDefault(x => x.Id == 1).Item1.NameMeeting);

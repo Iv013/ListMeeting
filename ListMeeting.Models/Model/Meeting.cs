@@ -17,12 +17,12 @@ namespace ListMeeting.Models.Models
         [DisplayName( "Начало встречи")]
         [Required]
         //добаляем логику, что при установке начального времени, устанавливаем и конечное время, в зависимости от длятельности встречи
-        public DateTime DateTimeStartEvent 
-        { get  { return _dateTimeStartEvent;}
+        public DateTime DateTimeStartMeeting 
+        { get  { return _dateTimeStartMeeting;}
           set
           {
-                _dateTimeStartEvent = value;
-                _dateTimeEndEvent = _dateTimeStartEvent + TimeSpan.FromMinutes(_durationEvent);
+                _dateTimeStartMeeting = value;
+                _dateTimeEndMeeting = _dateTimeStartMeeting + TimeSpan.FromMinutes(_durationMeeting);
 
             }
         }
@@ -30,31 +30,31 @@ namespace ListMeeting.Models.Models
         [Required]
         [Range(1,1440)]
         //при изменении продолжительности встречи меняем конечное время
-        public int DurationEvent
+        public int DurationMeeting
         {
             get
             {
-                return _durationEvent; 
+                return _durationMeeting; 
             }
             set
             {
-                _dateTimeEndEvent = DateTimeStartEvent + TimeSpan.FromMinutes(value);
-                _durationEvent = value;
+                _dateTimeEndMeeting = DateTimeStartMeeting + TimeSpan.FromMinutes(value);
+                _durationMeeting = value;
             }
         }
 
-        private DateTime _dateTimeEndEvent;
-        private DateTime _dateTimeStartEvent;
-        private int _durationEvent;
+        private DateTime _dateTimeEndMeeting;
+        private DateTime _dateTimeStartMeeting;
+        private int _durationMeeting;
         private bool needToRemind = true;  
         private int _timeReminder = 5;
 
         [DisplayName("Окончание встречи")]
-        public DateTime DateTimeEndEvent 
+        public DateTime DateTimeEndMeeting 
         {
             get 
             {
-                return _dateTimeEndEvent; 
+                return _dateTimeEndMeeting; 
             }
         }
 
@@ -82,8 +82,8 @@ namespace ListMeeting.Models.Models
             StringBuilder stringBuilder =  new StringBuilder();
             stringBuilder.Append(getStringWithSpace(Id.ToString()));
             stringBuilder.Append(getStringWithSpace(NameMeeting));
-            stringBuilder.Append(getStringWithSpace(DateTimeStartEvent.ToString("g"))); ;
-            stringBuilder.Append(getStringWithSpace(DateTimeEndEvent.ToString("g")));
+            stringBuilder.Append(getStringWithSpace(DateTimeStartMeeting.ToString("g"))); ;
+            stringBuilder.Append(getStringWithSpace(DateTimeEndMeeting.ToString("g")));
             stringBuilder.Append(getStringWithSpace(TimeReminder.ToString()+"мин"));
 
             return stringBuilder.ToString();

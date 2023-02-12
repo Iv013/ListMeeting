@@ -13,17 +13,17 @@ namespace TestListMeetings
              meetingDTO = new MeetingDTO
             {
                 Id = 11,
-                DateTimeEndEvent = DateTime.Now + TimeSpan.FromMinutes(30) + TimeSpan.FromDays(1),
+                DateTimeEndMeeting = DateTime.Now + TimeSpan.FromMinutes(30) + TimeSpan.FromDays(1),
                 NameMeeting = "Name",
-                DateTimeStartEvent = DateTime.Now + TimeSpan.FromDays(1),
+                DateTimeStartMeeting = DateTime.Now + TimeSpan.FromDays(1),
                 TimeReminder = 10
             };
 
             meeting = new Meeting
             { Id = 12,
                 NameMeeting = "Name 2",
-                DurationEvent = 60,
-                DateTimeStartEvent = DateTime.Now + TimeSpan.FromMinutes(2),
+                DurationMeeting = 60,
+                DateTimeStartMeeting = DateTime.Now + TimeSpan.FromMinutes(2),
                 TimeReminder = 10
             };
 
@@ -49,9 +49,9 @@ namespace TestListMeetings
            var meetingDTO2 = new MeetingDTO
             {
                 Id = 1,
-                DateTimeEndEvent = DateTime.Now + TimeSpan.FromMinutes(30) + TimeSpan.FromDays(1),
+                DateTimeEndMeeting = DateTime.Now + TimeSpan.FromMinutes(30) + TimeSpan.FromDays(1),
                 NameMeeting = "Name2",
-                DateTimeStartEvent = DateTime.Now + TimeSpan.FromDays(1),
+                DateTimeStartMeeting = DateTime.Now + TimeSpan.FromDays(1),
                 TimeReminder = 0
             };
 

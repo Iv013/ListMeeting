@@ -3,8 +3,8 @@
 
 namespace ListMeetings.Services.MeetingRemind
 {
-    public interface IMeetingRemind
+    public interface IMeetingReminder
     {
-        IEnumerable<ServiceResponse> MakeRemind();
+        IEnumerable<ServiceResponse> MakeReminder();
     }
 }

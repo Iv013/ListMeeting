@@ -12,8 +12,8 @@ namespace ListMeetings.Core.DataMapper
             { 
                 Id = DTO.Id,
                 NameMeeting = DTO.NameMeeting,
-                DateTimeStartEvent = DTO.DateTimeStartEvent,
-                DurationEvent =(int)(DTO.DateTimeEndEvent -  DTO.DateTimeStartEvent).TotalMinutes,
+                DateTimeStartMeeting = DTO.DateTimeStartMeeting,
+                DurationMeeting =(int)(DTO.DateTimeEndMeeting -  DTO.DateTimeStartMeeting).TotalMinutes,
                 TimeReminder = DTO.TimeReminder,
             };
         }
@@ -24,8 +24,8 @@ namespace ListMeetings.Core.DataMapper
             return new MeetingDTO
             {
                 Id = domainModel.Id,
-                DateTimeStartEvent = domainModel.DateTimeStartEvent,
-                DateTimeEndEvent = domainModel.DateTimeEndEvent,
+                DateTimeStartMeeting = domainModel.DateTimeStartMeeting,
+                DateTimeEndMeeting = domainModel.DateTimeEndMeeting,
                 TimeReminder = domainModel.TimeReminder,
                 NameMeeting = domainModel.NameMeeting,
             };

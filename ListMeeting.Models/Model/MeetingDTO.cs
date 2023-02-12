@@ -22,11 +22,11 @@ namespace ListMeeting.Models.Models
 
         [DisplayName( "Начало встречи")]
         [Required]
-        public DateTime DateTimeStartEvent { get; set; }
+        public DateTime DateTimeStartMeeting { get; set; }
 
         [DisplayName("Окончание встречи")]
         [Required]
-        public DateTime DateTimeEndEvent {get; set;}
+        public DateTime DateTimeEndMeeting {get; set;}
 
         [Range(1, 1440)]
         [Required]

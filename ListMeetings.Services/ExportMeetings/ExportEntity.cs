@@ -8,7 +8,7 @@ namespace ListMeetings.Services.ExportMeetings
 
         public(string, bool) StartExportToFile(List<T> model, string nameFile) 
         {
-            try //в try Catch обернул так как может прийти неверное имя файла, чтобы не проверять регулярными выражениями
+            try //в try Catch обернул так как может прийти неверное имя файла, хотя можно было проверить с помощью регулярного выражения
             {
                 var file = new FileInfo(nameFile.Trim() == "" ? "Новый файл.txt" : nameFile.Trim()+".txt");
                 using (var writer = new StreamWriter(file.FullName))

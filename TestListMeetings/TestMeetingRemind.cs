@@ -24,9 +24,9 @@ namespace TestListMeetings
             DataBase.Add(new MeetingDTO
             {
                 Id = 1,
-                DateTimeEndEvent = DateTime.Now + TimeSpan.FromMinutes(50),
+                DateTimeEndMeeting = DateTime.Now + TimeSpan.FromMinutes(50),
                 NameMeeting = "Name",
-                DateTimeStartEvent = DateTime.Now + TimeSpan.FromMinutes(1),
+                DateTimeStartMeeting = DateTime.Now + TimeSpan.FromMinutes(1),
                 TimeReminder = 10
             });
       
@@ -34,8 +34,8 @@ namespace TestListMeetings
         [Test]
         public void TestMeatingRemindSend()
         {
-            var remind = new MeetingRemind(_meetingsRepo);
-            Assert.That(remind.MakeRemind().First().Success, Is.EqualTo(100));
+            var remind = new MeetingReminder(_meetingsRepo);
+            Assert.That(remind.MakeReminder().First().Success, Is.EqualTo(100));
        
         }
 

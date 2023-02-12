@@ -29,7 +29,7 @@ namespace ListMeeting.Core.Repository
                 };
             }
             //Если новая встреча планируется в прошлом возвращаем ошибку
-            if (obj.DateTimeStartEvent < DateTime.Now) 
+            if (obj.DateTimeStartMeeting < DateTime.Now) 
             {
                 return new ServiceResponse 
                 { 
@@ -70,13 +70,13 @@ namespace ListMeeting.Core.Repository
                     result.Add(_dataMapper.CreateDomainModel(meeting));
                 }
 
-                return result.OrderBy(x => x.DateTimeStartEvent).ToList(); // результат из нескольких записей всегда сортируем по дате начала
+                return result.OrderBy(x => x.DateTimeStartMeeting).ToList(); // результат из нескольких записей всегда сортируем по дате начала
             }
             foreach (MeetingDTO meeting in _dataBase)
                 result.Add(_dataMapper.CreateDomainModel(meeting));
 
 
-            return result.OrderBy(x=>x.DateTimeStartEvent).ToList();  // результат из нескольких записей всегда сортируем по дате начала
+            return result.OrderBy(x=>x.DateTimeStartMeeting).ToList();  // результат из нескольких записей всегда сортируем по дате начала
         }
 
 
@@ -115,7 +115,7 @@ namespace ListMeeting.Core.Repository
                 return new ServiceResponse { Message = StringConst.ErrorUpdate + StringConst.ErrorMeetingsIntersection, Success = 409 };
             }
             //Если новая встреча планируется в прошлом возвращаем ошибку
-            if (entity.DateTimeStartEvent < DateTime.Now)
+            if (entity.DateTimeStartMeeting < DateTime.Now)
             {
                 _dataBase.Add(oldMeeting);
                 return new ServiceResponse { Message = StringConst.ErrorUpdate + StringConst.ErrorMeetingInPast, Success = 409 };
@@ -132,8 +132,8 @@ namespace ListMeeting.Core.Repository
         /// Проверка на пересечение на наличие пересечения дат встреч
         /// </summary>
         bool CheckIntersectionMeetings(Meeting entity)=> _dataBase.Any(x =>
-                  !(x.DateTimeStartEvent > entity.DateTimeEndEvent ||
-                   x.DateTimeEndEvent < entity.DateTimeStartEvent));
+                  !(x.DateTimeStartMeeting > entity.DateTimeEndMeeting ||
+                   x.DateTimeEndMeeting < entity.DateTimeStartMeeting));
 
 
     }

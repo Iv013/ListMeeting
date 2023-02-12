@@ -11,9 +11,9 @@ namespace ListMeetings.View
         {
             Meeting newEvent = new Meeting();
             newEvent.NameMeeting = GetNameMeeting();
-            newEvent.DateTimeStartEvent = GetEnterDateOrTime(0).Date + GetEnterDateOrTime(1).TimeOfDay;
+            newEvent.DateTimeStartMeeting = GetEnterDateOrTime(0).Date + GetEnterDateOrTime(1).TimeOfDay;
             //  Console.WriteLine("");
-            newEvent.DurationEvent = GetDurationEvent();
+            newEvent.DurationMeeting = GetDurationMeeting();
 
             return newEvent;
 
@@ -28,7 +28,7 @@ namespace ListMeetings.View
         }
 
         /// <returns>Возвращает длительность встречи в минутах введенную с консоли</returns>
-        int GetDurationEvent()
+        int GetDurationMeeting()
         {
             int duration;
             do
@@ -124,13 +124,13 @@ namespace ListMeetings.View
                         obj.NameMeeting = GetNameMeeting();
                         break;
                     case "2":
-                        obj.DateTimeStartEvent = GetEnterDateOrTime(0).Date + obj.DateTimeStartEvent.TimeOfDay;
+                        obj.DateTimeStartMeeting = GetEnterDateOrTime(0).Date + obj.DateTimeStartMeeting.TimeOfDay;
                         break;
                     case "3":
-                        obj.DateTimeStartEvent = obj.DateTimeStartEvent.Date + GetEnterDateOrTime(1).TimeOfDay;
+                        obj.DateTimeStartMeeting = obj.DateTimeStartMeeting.Date + GetEnterDateOrTime(1).TimeOfDay;
                         break;
                     case "4":
-                        obj.DurationEvent = GetDurationEvent();
+                        obj.DurationMeeting = GetDurationMeeting();
                         break;
                     case "5":
                         obj.TimeReminder = GetTimeReminder();
