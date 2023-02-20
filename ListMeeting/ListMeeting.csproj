@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.5.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ListMeeting.Models\ListMeeting.Models.csproj" />
     <ProjectReference Include="..\ListMeetings.Core\ListMeetings.Core.csproj" />
     <ProjectReference Include="..\ListMeetings.Services\ListMeetings.Services.csproj" />

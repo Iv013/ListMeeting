@@ -13,6 +13,7 @@ namespace ListMeeting.Models.Models
 
     {
         [DisplayName("Номер записи")]
+        [Key]
         public int Id { get; set; }
 
         [DisplayName ("Название")]

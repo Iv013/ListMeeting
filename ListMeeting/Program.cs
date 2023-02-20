@@ -1,13 +1,17 @@
 ﻿
 
+using Autofac;
 using ListMeeting;
 using ListMeeting.Core.Repository;
 using ListMeeting.Models.Models;
 using ListMeetings.Core.Data;
 using ListMeetings.Core.DataMapper;
+using ListMeetings.Core.Repository;
 using ListMeetings.Services.ExportMeetings;
 using ListMeetings.Services.MeetingRemind;
 using ListMeetings.View;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 static class Program
 {
@@ -24,9 +28,11 @@ static class Program
         //класс для где консолидирована работа с консолью, ввод и вывод данных
         ActionsWithConsole actionWithConsole = new ActionsWithConsole();
 
-        //объект реализации обмена  с базой данных. 
-        IMeetingRepository<Meeting, MeetingDTO> _meetingsRepo = new MeetingRepository(DataBase, dataMapper);
 
+        ApplicationDbContext context = new ApplicationDbContext();
+        //объект реализации обмена  с базой данных. 
+        // IMeetingRepository<Meeting, MeetingDTO> _meetingsRepo = new MeetingRepository(DataBase, dataMapper);
+        IMeetingRepository<Meeting, MeetingDTO> _meetingsRepo = new MeetingRepositoryInMemory(context, dataMapper);
         //класс для формирования сообщений с напоминаниями о встрече
         IMeetingReminder meetingRemind = new MeetingReminder(_meetingsRepo); 
 

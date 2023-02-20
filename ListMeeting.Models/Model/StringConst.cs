@@ -27,7 +27,7 @@
         public const string EnterTimeDuration = "\n\nВведите продолжительность встречи в минутах(больше 0):";
         public const string EnterIdForUpdate = "\nВведите номер записи которую хотите изменить:";
         public const string EnterIdForDelete = "\nВведите номер записи которую хотите удалить:";
-        public const string ObjectNotFound = "\nОшибка, запись с данным номером отсутвует в базе:";
+        public const string ObjectNotFound = "\nОшибка, запись с данным номером отсутствует в базе:";
         public const string EditModeEnterCommand = "\nРежим редактирования. Чтобы выбрать параметр для изменения введите команду:";
         public const string SaveOrNo = "\nСохранить введенные изменения(Y/N):";
         public const string AddSuccess = "\nНовая встреча успешно добавлена";
